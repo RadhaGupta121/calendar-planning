@@ -2,24 +2,41 @@ import React, { useState } from 'react';
 import SaveDataButton from './SaveData';
 
 function WorkingZone({currentDate,currentMonth,months,days,timelist,handleCheckSelection,checked,totalchecked}) {
- console.log(totalchecked,checked);
+//  console.log(totalchecked,checked);
 //  const monthName=['Jan','Feb','March','Apr','May','June','July','Aug','Sept','Oct','Nov','Dec'];
-const[jsonFormat,setJsonFormat]=useState(false);
+const dayName = ['Mon', 'Tues', 'Wed', 'Thrus', 'Fri'];
+const startDate = new Date().getDay();
+const startDay = dayName[startDate];
+console.log(new Date().getDay());
+const [jsonFormat, setJsonFormat] = useState(false);
+for(let i=new Date().getDate()-2;i>=0;i--)
+  {
+    dayName.unshift(dayName.pop());
+  }
+  console.log(dayName);
 function handleJSONData()
 {
   setJsonFormat(!jsonFormat);
 }
+
+const increaseDate = (date, daysToAdd) => {
+  const newDate = new Date(date);
+  newDate.setDate(newDate.getDate() + daysToAdd);
+  return newDate;
+};
+
   return (
     <div >
       
-     {
-      days.map((index)=>{
-        return(
+     
+       {dayName.map((index) => {
+        const increasedDate = increaseDate(currentDate, dayName.indexOf(index));
+        return (
           <>
               <div style={{display:"flex",gap:'1rem',justifyContent:"space-around"}}>
                 <div style={{width:"10%",backgroundColor:"lightgray",padding:"12px"}} >
                 <h3 style={{color:"red"}}>{index}</h3>
-              <p>{currentDate}</p>
+                <p>{increasedDate.toDateString()}</p>
               </div>
               <div style={{width:"80%"}}>
                <div style={{display:"flex",border:"1px solid gray",flexWrap:"wrap",padding:"12px"}}>
