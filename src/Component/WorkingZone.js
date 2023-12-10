@@ -67,7 +67,7 @@ const increaseDate = (date, daysToAdd) => {
     } JSON Format</button>
     <SaveDataButton data={totalchecked}/>
     </div>
-     <div>
+     <div style={{paddingLeft:"2rem"}}>
       {
         jsonFormat ? (
           <div>
@@ -93,10 +93,11 @@ const increaseDate = (date, daysToAdd) => {
                 );
               })
             }
+ {']'}
           </div>
         ) : null
       }
-      {']'}
+     
     </div>
     </div>
   );
